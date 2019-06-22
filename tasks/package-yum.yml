@@ -1,10 +1,26 @@
 ---
 
+- rpm_key:
+    state: present
+    key: "{{ item.key }}"
+  with_items:
+    - "{{ packages_yum_add_repos }}"
+
+- name: Add repo gf-plus
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.baseurl }}"
+  with_items:
+    - "{{ packages_yum_add_repos }}"
+
+
 - name: Yum
   yum:
     name: "{{ item.yum | default(item.name) }}"
     state: "{{ item.state | default(package_state) }}"
     update_cache: "{{ package_update_cache }}"
+    enablerepo: "{{ item.yum_enablerepo | default(packages_yum_enablerepo) }}"
   when: (item.yum_ignore|default('no'))|string in 'False,false,No,no'
   with_flattened:
     - "{{ package_list }}"

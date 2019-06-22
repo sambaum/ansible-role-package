@@ -17,3 +17,13 @@ package_update_cache: yes
 
 # Cache valid time
 package_cache_valid_time: 3600
+
+# Repoid of repositories to enable for the install/update operation. 
+packages_yum_enablerepo: []
+
+packages_yum_add_repos: []
+# Example:
+#  - name: gf-plus
+#    baseurl: http://mirror.ghettoforge.org/distributions/gf/el/$releasever/plus/$basearch/
+#    description: ghettoforge gf-plus
+#    key: http://mirror.ghettoforge.org/distributions/gf/RPM-GPG-KEY-gf.el7
