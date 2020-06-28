@@ -1,0 +1,22 @@
+---
+
+- name: install snapd
+  apt:
+    name:
+      - snapd
+    update_cache: true
+
+- name: ensure snap service is running
+  service:
+    name: snapd
+    state: started
+    enabled: true
+
+- name: Install snap packages
+  snap:
+    name: "{{ item.name }}"
+    classic: "{{ item.use_classic }}"
+  with_flattened:
+    - "{{ package_list_snap }}"
+    - "{{ package_list_host_snap }}"
+    - "{{ package_list_group_snap }}"
