@@ -1,4 +1,15 @@
 ---
+
+dependencies:
+  - role: geerlingguy.pip
+    vars:
+      pip_package: python3-pip
+      pip_install_packages: "{{ package_list_pip + package_list_host_pip + package_list_group_pip }}"
+    when: (package_list_pip is defined) and (package_list_pip|length > 0) or
+          (package_list_host_pip is defined) and (package_list_host_pip|length > 0) or
+          (package_list_group_pip is defined) and (package_list_group_pip|length > 0)
+
+
 galaxy_info:
   author: G. Roggemans
   description: A role for installing packages on different operating systems.
@@ -108,5 +119,3 @@ galaxy_info:
   - packaging
 
 allow_duplicates: yes
-
-dependencies: []

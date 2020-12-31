@@ -38,3 +38,7 @@ packages_yum_add_repos: []
 #    baseurl: http://mirror.ghettoforge.org/distributions/gf/el/$releasever/plus/$basearch/
 #    description: ghettoforge gf-plus
 #    key: http://mirror.ghettoforge.org/distributions/gf/RPM-GPG-KEY-gf.el7
+
+package_list_pip: []
+package_list_host_pip: []
+package_list_group_pip: []
