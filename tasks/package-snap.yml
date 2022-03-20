@@ -16,4 +16,6 @@
   snap:
     name: "{{ item.name }}"
     classic: "{{ item.use_classic | default(false) }}"
+    channel: "{{ item.channel | default('stable') }}"
+    state: "{{ item.state | default('present') }}"
   with_items: "{{ package_list_snap + package_list_host_snap + package_list_group_snap}}"
