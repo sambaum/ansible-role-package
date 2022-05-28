@@ -1,0 +1,14 @@
+---
+
+- name: install npm
+  apt:
+    name:
+      - npm
+    update_cache: true
+
+- name: Install npm packages
+  npm:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+    global: "{{ item.global | default('stable') }}"
+  with_items: "{{ package_list_npm + package_list_host_npm + package_list_group_npm}}"

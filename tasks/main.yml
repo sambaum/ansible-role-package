@@ -25,3 +25,8 @@
   when: (package_list_snap is defined) and (package_list_snap|length > 0) or
         (package_list_host_snap is defined) and (package_list_host_snap|length > 0) or
         (package_list_group_snap is defined) and (package_list_group_snap|length > 0)
+
+- include: package-npm.yml
+  when: (package_list_npm is defined) and (package_list_npm|length > 0) or
+        (package_list_host_npm is defined) and (package_list_host_npm|length > 0) or
+        (package_list_group_npm is defined) and (package_list_group_npm|length > 0)

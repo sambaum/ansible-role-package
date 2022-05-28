@@ -1,24 +1,23 @@
 ---
 
-# List of packages
+# List of regular packages
 package_list: []
-
-# List of packages
 package_list_host: []
-
-# List of packages
 package_list_group: []
 
-# List of packages
+# List of snap packages
 package_list_snap: []
 #  - name: helm
 #    use_classic: true
-
-# List of packages
 package_list_host_snap: []
-
-# List of packages
 package_list_group_snap: []
+
+# List of npm packages
+package_list_npm: []
+#  - name: prettier
+#    global: yes
+package_list_host_npm: []
+package_list_group_npm: []
 
 # Packages state
 package_state: present
