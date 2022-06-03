@@ -10,5 +10,5 @@
   npm:
     name: "{{ item.name }}"
     state: "{{ item.state | default('present') }}"
-    global: "{{ item.global | default('stable') }}"
+    global: "{{ item.global | default('no') }}"
   with_items: "{{ package_list_npm + package_list_host_npm + package_list_group_npm}}"
