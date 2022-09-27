@@ -5,12 +5,14 @@
     name:
       - snapd
     update_cache: true
+  when: "'wsl' not in group_names"
 
 - name: ensure snap service is running
   service:
     name: snapd
     state: started
     enabled: true
+  when: "'wsl' not in group_names"
 
 - name: Install snap packages
   snap:
@@ -19,3 +21,4 @@
     channel: "{{ item.channel | default('stable') }}"
     state: "{{ item.state | default('present') }}"
   with_items: "{{ package_list_snap + package_list_host_snap + package_list_group_snap}}"
+  when: "'wsl' not in group_names"
