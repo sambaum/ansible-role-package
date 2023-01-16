@@ -1,12 +1,27 @@
 ---
 
-- name: Brew
-  become: no
-  homebrew:
-    name: "{{ item.brew | default(item.name) }}"
+#- name: Install Homebrew
+#  become: yes
+#  become_user: "{{ package_brew_user }}"
+#  ansible.builtin.shell: '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+#  environment:
+#    NONINTERACTIVE: 1
+#  args:
+#    creates: /path/to/database
+
+- name: "Check if Homebrew is installed"
+  stat:
+    path: "/home/linuxbrew/.linuxbrew/bin/brew"
+  register: result
+
+- name: Install Brew Packages
+  become: yes
+  become_user: "{{ package_brew_user }}"
+  community.general.homebrew:
+    name: "{{ item.name }}"
     state: "{{ item.state | default(package_state) }}"
-  when: (item.brew_ignore|default('no'))|string in 'False,false,No,no'
-  with_flattened:
-    - "{{ package_list }}"
-    - "{{ package_list_host }}"
-    - "{{ package_list_group }}"
+    update_homebrew: true
+  with_items: "{{ package_list_brew + package_list_host_brew + package_list_group_brew}}"
+  when: result.stat.exists
+  environment:
+    PATH: /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:{{ ansible_env.PATH }}

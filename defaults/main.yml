@@ -41,3 +41,10 @@ packages_yum_add_repos: []
 package_list_pip: []
 package_list_host_pip: []
 package_list_group_pip: []
+
+# Brew must be installed already
+package_brew_user: # currently only one user supported
+package_list_brew: []
+package_list_host_brew: []
+package_list_group_brew: []
+
