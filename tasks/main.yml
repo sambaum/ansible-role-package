@@ -1,37 +1,37 @@
 ---
 
-- include: package-brew.yml
+- include_tasks: package-brew.yml
   when: (package_list_brew is defined) and (package_list_brew|length > 0) or
         (package_list_host_brew is defined) and (package_list_host_brew|length > 0) or
         (package_list_group_brew is defined) and (package_list_group_brew|length > 0)
 
-- include: package-apt.yml
+- include_tasks: package-apt.yml
   when: ansible_pkg_mgr == 'apt'
 
-- include: package-yum.yml
+- include_tasks: package-yum.yml
   when: ansible_pkg_mgr == 'yum'
 
-- include: package-dnf.yml
+- include_tasks: package-dnf.yml
   when: ansible_pkg_mgr == 'dnf'
 
-- include: package-brew.yml
+- include_tasks: package-brew.yml
   when: ansible_os_family == 'Darwin'
 
-- include: package-zypper.yml
+- include_tasks: package-zypper.yml
   when: ansible_pkg_mgr == 'zypper'
 
-- include: package-pacman.yml
+- include_tasks: package-pacman.yml
   when: ansible_pkg_mgr == 'pacman'
 
-- include: package-portage.yml
+- include_tasks: package-portage.yml
   when: ansible_pkg_mgr == 'portage'
 
-- include: package-snap.yml
+- include_tasks: package-snap.yml
   when: (package_list_snap is defined) and (package_list_snap|length > 0) or
         (package_list_host_snap is defined) and (package_list_host_snap|length > 0) or
         (package_list_group_snap is defined) and (package_list_group_snap|length > 0)
 
-- include: package-npm.yml
+- include_tasks: package-npm.yml
   when: (package_list_npm is defined) and (package_list_npm|length > 0) or
         (package_list_host_npm is defined) and (package_list_host_npm|length > 0) or
         (package_list_group_npm is defined) and (package_list_group_npm|length > 0)
