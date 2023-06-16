@@ -8,7 +8,16 @@
     cache_valid_time: "{{ package_cache_valid_time }}"
     install_recommends: "{{ item.apt_install_recommends | default(omit) }}"
   when: (item.apt_ignore|default('no'))|string in 'False,false,No,no'
-  with_flattened:
-    - "{{ package_list }}"
-    - "{{ package_list_host }}"
-    - "{{ package_list_group }}"
+  loop: "{{ package_list | union (package_list_host) | union (package_list_group) | unique }}"
+
+- name: Install qemu-guest-agent
+  apt:
+    pkg: qemu-guest-agent
+  when: "ansible_virtualization_type == 'kvm'"
+
+- name: Install virtualbox-guest
+  apt:
+    pkg:
+      - virtualbox-guest-dkms
+      - virtualbox-guest-x11
+  when: "ansible_virtualization_type == 'virtualbox'"
