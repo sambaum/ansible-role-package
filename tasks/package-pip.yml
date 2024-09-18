@@ -1,0 +1,38 @@
+# - name: Install pip packages
+#   ansible.builtin.pip:
+#     name: "{{ item.name }}"
+#   with_items: "{{ package_list_pip + package_list_host_pip + package_list_group_pip}}"
+
+- name: Install pipx
+  ansible.builtin.package:
+    name: pipx
+    state: present
+
+# - name: Install python packages with pipx
+#   apt:
+#     name: "python3-{{ item.apt | default(item.name) }}"
+#     state: "{{ item.state | default(package_state) }}"
+#     update_cache: "{{ package_update_cache }}"
+#     cache_valid_time: "{{ package_cache_valid_time }}"
+#     install_recommends: "{{ item.apt_install_recommends | default(omit) }}"
+#   when: (item.apt_ignore|default('no'))|string in 'False,false,No,no'
+#   loop: "{{ package_list_pip | default([]) | union(package_list_host_pip | default([])) | union(package_list_group_pip | default([])) | unique }}"
+
+
+- name: Install python packages with pipx
+  community.general.pipx:
+    name: "{{ item.apt | default(item.name) }}"
+  loop: "{{ package_list_pip | default([]) | union(package_list_host_pip | default([])) | union(package_list_group_pip | default([])) | unique }}"
+
+# - name: Ensure pipx path is set
+#   ansible.builtin.shell:
+#     cmd: pipx ensurepath
+#     creates: ~/.local/bin/pipx
+
+- name: Ensure PATH is set in .zshrc
+  lineinfile:
+    # path: ~/.zshrc
+    path: /etc/profile
+    regexp: '^export PATH='
+    line: 'export PATH="/root/.local/bin:$PATH"'
+    state: present

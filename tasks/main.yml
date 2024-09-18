@@ -1,10 +1,4 @@
 ---
-
-- include_tasks: package-brew.yml
-  when: (package_list_brew is defined) and (package_list_brew|length > 0) or
-        (package_list_host_brew is defined) and (package_list_host_brew|length > 0) or
-        (package_list_group_brew is defined) and (package_list_group_brew|length > 0)
-
 - include_tasks: package-apt.yml
   when: ansible_pkg_mgr == 'apt'
 
@@ -26,6 +20,11 @@
 - include_tasks: package-portage.yml
   when: ansible_pkg_mgr == 'portage'
 
+- include_tasks: package-brew.yml
+  when: (package_list_brew is defined) and (package_list_brew|length > 0) or
+        (package_list_host_brew is defined) and (package_list_host_brew|length > 0) or
+        (package_list_group_brew is defined) and (package_list_group_brew|length > 0)
+
 - include_tasks: package-snap.yml
   when: (package_list_snap is defined) and (package_list_snap|length > 0) or
         (package_list_host_snap is defined) and (package_list_host_snap|length > 0) or
@@ -36,4 +35,8 @@
         (package_list_host_npm is defined) and (package_list_host_npm|length > 0) or
         (package_list_group_npm is defined) and (package_list_group_npm|length > 0)
 
-
+- include_tasks: package-pip.yml
+  when: (package_list_pip is defined) and (package_list_pip|length > 0) and (ansible_distribution_major_version | int > 22) or
+        (package_list_host_pip is defined) and (package_list_host_pip|length > 0) and (ansible_distribution_major_version | int > 22) or
+        (package_list_group_pip is defined) and (package_list_group_pip|length > 0) and (ansible_distribution_major_version | int > 22) 
+        
