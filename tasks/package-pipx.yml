@@ -1,0 +1,10 @@
+---
+
+- name: pipx
+  community.general.pipx:
+    name: "{{ item.pipx | default(item.name) }}"
+    state: "{{ item.state | default(package_state) }}"
+    source: "{{ item.pipx_source | default(omit) }}"
+    pip_args: "{{ item.pipx_pip_args | default(omit) }}"
+  when: (item.pipx_ignore|default('no'))|string in 'False,false,No,no'
+  with_items: "{{ packages }}"

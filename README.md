@@ -7,7 +7,7 @@
 
 A role for managing packages on different operating systems.
 
-This role currently supports apt, yum, dnf, brew, zypper, pacman, portage and snap.
+This role currently supports apt, yum, dnf, brew, zypper, pacman, portage, snap and pipx.
 Feel free to send a pull or feature request to add your favorite package
 manager!
 
@@ -66,6 +66,8 @@ in the list can have following attributes:
 | `opkg` | Package name for opkg | no |
 | `opkg_ignore` | Ignore package for opkg | no |
 | `snap` | Package name for snap | no |
+| `pipx` | Package name for pipx | no |
+| `pipx_ignore` | Ignore package for pipx | no |
 
 By default `package_state` and `item.name` are used when managing the packages.
 If however `item.state` is defined or a more specific package name (eg
@@ -90,7 +92,10 @@ package_list:
 
 ## Dependencies
 
-None.
+For pipx:
+```bash
+ansible-galaxy collection install community.general
+```
 
 ## Example Playbook
 
