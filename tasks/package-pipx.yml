@@ -1,5 +1,10 @@
 ---
 
+- name: Ensure pipx is installed
+  ansible.builtin.package:
+    name: pipx
+    state: present
+
 - name: pipx
   community.general.pipx:
     name: "{{ item.pipx | default(item.name) }}"
