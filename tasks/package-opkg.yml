@@ -1,7 +1,7 @@
 ---
 
 - name: Opkg
-  opkg:
+  community.general.opkg:
     name: "{{ item.opkg | default(item.name) }}"
     state: "{{ item.state | default(package_state) }}"
     update_cache: "{{ package_update_cache }}"

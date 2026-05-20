@@ -1,7 +1,7 @@
 ---
 
 - name: Portage
-  portage:
+  community.general.portage:
     package: "{{ item.portage | default(item.name) }}"
     state: "{{ item.state | default(package_state) }}"
     sync: "{{ package_update_cache }}"

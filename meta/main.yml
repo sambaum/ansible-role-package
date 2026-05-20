@@ -107,6 +107,6 @@ galaxy_info:
   - portage
   - packaging
 
-allow_duplicates: yes
+allow_duplicates: true
 
 dependencies: []

@@ -1,7 +1,7 @@
 ---
 
 - name: Snap
-  snap:
+  community.general.snap:
     name: "{{ item.snap | default(item.name) }}"
     state: "{{ item.state | default(package_state) }}"
     classic: "{{ item.snap_classic | default(omit) }}"

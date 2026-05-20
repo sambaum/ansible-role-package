@@ -1,7 +1,7 @@
 ---
 
 - name: Pacman
-  pacman:
+  community.general.pacman:
     name: "{{ item.pacman | default(item.name) }}"
     state: "{{ item.state | default(package_state) }}"
   when: (item.pacman_ignore|default('no'))|string in 'False,false,No,no'

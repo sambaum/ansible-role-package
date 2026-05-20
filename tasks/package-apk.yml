@@ -1,7 +1,7 @@
 ---
 
 - name: Apk
-  apk:
+  community.general.apk:
     name: "{{ item.apk | default(item.name) }}"
     state: "{{ item.state | default(package_state) }}"
     update_cache: "{{ package_update_cache }}"

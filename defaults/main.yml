@@ -13,7 +13,7 @@ package_list_group: []
 package_state: present
 
 # Update cache?
-package_update_cache: yes
+package_update_cache: true
 
 # Cache valid time
 package_cache_valid_time: 3600

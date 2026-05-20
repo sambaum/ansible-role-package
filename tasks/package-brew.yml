@@ -1,8 +1,8 @@
 ---
 
 - name: Brew
-  become: no
-  homebrew:
+  become: false
+  community.general.homebrew:
     name: "{{ item.brew | default(item.name) }}"
     state: "{{ item.state | default(package_state) }}"
   when: (item.brew_ignore|default('no'))|string in 'False,false,No,no'
