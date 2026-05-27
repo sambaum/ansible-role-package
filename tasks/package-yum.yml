@@ -1,7 +1,7 @@
 ---
 
 - name: Yum
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: "{{ item.yum | default(item.name) }}"
     state: "{{ item.state | default(package_state) }}"
     update_cache: "{{ package_update_cache }}"
